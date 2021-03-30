@@ -1,0 +1,81 @@
+{if $oBestellung_arr|@count > 0 && $oBestellung_arr}
+<script type='text/javascript' src='{$oPlugin->cAdminmenuPfadURL}js/novalnet_admin.js'></script>
+    <form name="bestellungen" method="post" action="bestellungen.php">
+    {$jtl_token}
+        <input type="hidden" name="zuruecksetzen" value="1" />
+            {if isset($cSuche) && $cSuche|count_characters > 0}
+                <input type="hidden" name="cSuche" value="{$cSuche}" />
+            {/if}
+            <div class=" block clearall">
+                <div class="left">
+                {if $oBlaetterNaviUebersicht->nAktiv == 1}
+                    <div class="pages tright">
+                        <ul class="pagination">
+                            <span class="pageinfo">Eintrag: <strong>{$oBlaetterNaviUebersicht->nVon}</strong> - {$oBlaetterNaviUebersicht->nBis} {#from#} {$oBlaetterNaviUebersicht->nAnzahl}</span>
+                                <li class="pagination-item"><a class="back" href="plugin.php?kPlugin={$oPlugin->kPlugin}&cPluginTab=Novalnet-Bestellungen&s1={$oBlaetterNaviUebersicht->nVoherige}{if isset($cSuche) && $cSuche|count_characters > 0}&cSuche={$cSuche}{/if}">&laquo;</a>
+                                </li>
+                                {if $oBlaetterNaviUebersicht->nAnfang != 0}
+                                <li class="pagination-item"><a href="plugin.php?kPlugin={$oPlugin->kPlugin}&cPluginTab=Novalnet-Bestellungen&s1={$oBlaetterNaviUebersicht->nAnfang}{if isset($cSuche) && $cSuche|count_characters > 0}&cSuche={$cSuche}{/if}">{$oBlaetterNaviUebersicht->nAnfang}</a></li>
+                                <li class="pagination-item"><span class="page">...</span></li {/if}
+                                {foreach name=blaetternavi from=$oBlaetterNaviUebersicht->nBlaetterAnzahl_arr item=Blatt}
+                                <li class="pagination-item {if $oBlaetterNaviUebersicht->nAktuelleSeite == $Blatt}active{/if}">
+                                      <a class="page" href="plugin.php?kPlugin={$oPlugin->kPlugin}&cPluginTab=Novalnet-Bestellungen&s1={$Blatt}{if isset($cSuche) && $cSuche|count_characters > 0}&cSuche={$cSuche}{/if}">{$Blatt}</a>
+                                </li>
+                                {/foreach}
+
+                                {if $oBlaetterNaviUebersicht->nEnde != 0}
+                                     <li class="pagination-item"><span class="page">...</span></li><li class="pagination-item"><a class="page" href="plugin.php?kPlugin={$oPlugin->kPlugin}&cPluginTab=Novalnet-Bestellungen&s1={$oBlaetterNaviUebersicht->nEnde}{if isset($cSuche) && $cSuche|count_characters > 0}&cSuche={$cSuche}{/if}">{$oBlaetterNaviUebersicht->nEnde}</a></li>
+                                {/if}
+                            <li class="pagination-item">
+                                <a class="next" href="plugin.php?kPlugin={$oPlugin->kPlugin}&cPluginTab=Novalnet-Bestellungen&s1={$oBlaetterNaviUebersicht->nNaechste}{if isset($cSuche) && $cSuche|count_characters > 0}&cSuche={$cSuche}{/if}">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div>
+                {/if}
+                </div>
+            </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Bestellungen</h3>
+            </div>
+
+            <table class="list table">
+                <thead>
+                    <tr>
+                        <th>Bestellnummer</th>
+                        <th class="tleft">Kunde</th>
+                        <th class="tleft">Zahlungsart</th>
+                        <th class="tleft">Status</th>
+                        <th>Abgeholt durch Wawi</th>
+                        <th>Warensumme</th>
+                        <th class="tcenter">Bestelldatum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach name=bestellungen from=$oBestellung_arr item=oBestellung}
+                    <tr class="tab_bg{$smarty.foreach.bestellungen.iteration%2}">
+                        {assign var = bestellen value = $oBestellung->cBestellNr}
+                        <td id="order" class="tcenter"><span style="cursor:pointer;text-decoration:underline" onclick="admin_order_display('{$bestellen}') ;">{$oBestellung->cBestellNr}</span></td>
+                        <td class="tleft">{if $oBestellung->oKunde->cVorname || $oBestellung->oKunde->cNachname || $oBestellung->oKunde->cFirma}{$oBestellung->oKunde->cVorname} {$oBestellung->oKunde->cNachname}{if isset($oBestellung->oKunde->cFirma) && $oBestellung->oKunde->cFirma|count_characters > 0} ({$oBestellung->oKunde->cFirma}){/if}{else}- Kein Kundenkonto -{/if}</td>
+                        <td class="tleft">{$oBestellung->cZahlungsartName}</td>
+                        {assign var = status value = $oBestellung->cStatus|string_format:"%d"}
+                        <td class="tleft">{$oBestellung_status.$status}</td>
+                        <td class="tcenter">{if $oBestellung->cAbgeholt == "Y"}{#yes#}{else}{#no#}{/if}</td>
+                        <td class="tcenter">{$oBestellung->WarensummeLocalized[0]}</td>
+                        <td class="tcenter">{$oBestellung->dErstelldatum_de}</td>
+                        <input type="hidden" name="nn_order_no" id="nn_order_no" value="{$oBestellung->cBestellNr}">
+                        <input type="hidden" name="nn_plugin_include" id="nn_plugin_include" value="{$pluginInclude}">
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </form>
+{/if}
+
+<link rel='stylesheet' type='text/css' href="{$adminPathDir}css/novalnet_admin.css">
+<div class="adminCover">&nbsp;</div>
+{foreach name=bestellungen from=$oBestellung_arr item=oBestellung}
+    <div id='admin_order_display_block' style='display:none;' class='overlay_window_block'></div>
+{/foreach}

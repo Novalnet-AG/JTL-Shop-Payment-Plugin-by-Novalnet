@@ -1,0 +1,1954 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jtlshop3plugin>
+    <Name>Novalnet</Name>
+    <Description>Novalnet-Zahlungsplugin</Description>
+    <Author>Novalnet AG</Author>
+    <URL>https://www.novalnet.de</URL>
+    <XMLVersion>100</XMLVersion>
+    <ShopVersion>312</ShopVersion>
+    <Shop4Version>400</Shop4Version>
+    <PluginID>novalnetag</PluginID>
+    <Install>
+        <Version nr="100">
+            <CreateDate>2012-06-20</CreateDate>
+        </Version>
+        <Version nr="101">
+            <SQL>sql.sql</SQL>
+        <CreateDate>2012-09-01</CreateDate>
+        </Version>
+        <Version nr="102">
+            <CreateDate>2012-10-22</CreateDate>
+        </Version>
+        <Version nr="103">
+            <CreateDate>2013-01-23</CreateDate>
+        </Version>
+        <Version nr="104">
+            <CreateDate>2013-06-03</CreateDate>
+        </Version>
+        <Version nr="105">
+            <CreateDate>2013-08-13</CreateDate>
+        </Version>
+        <Version nr="210">
+            <CreateDate>2014-01-06</CreateDate>
+        </Version>
+        <Version nr="211">
+            <CreateDate>2014-02-23</CreateDate>
+        </Version>
+        <Version nr="212">
+            <CreateDate>2014-08-05</CreateDate>
+        </Version>
+        <Version nr="213">
+            <CreateDate>2015-01-21</CreateDate>
+        </Version>
+        <Version nr="1000">
+            <CreateDate>2015-02-13</CreateDate>
+            <SQL>sql.sql</SQL>
+        </Version>
+        <Version nr="1001">
+            <CreateDate>2015-09-02</CreateDate>
+            <SQL>sql.sql</SQL>
+        </Version>
+        <Version nr="1010">
+            <CreateDate>2015-11-04</CreateDate>
+        </Version>
+        <Version nr="1020">
+            <CreateDate>2016-09-21</CreateDate>
+        </Version>
+        <Version nr="1100">
+            <CreateDate>2016-09-22</CreateDate>
+            <SQL>update.sql</SQL>
+        </Version>
+        <Version nr="1110">
+            <CreateDate>2017-02-14</CreateDate>
+            <SQL>update.sql</SQL>
+        </Version>
+        <Version nr="1111">
+            <CreateDate>2017-04-11</CreateDate>
+        </Version>
+        <Version nr="1112">
+            <CreateDate>2017-10-26</CreateDate>
+             <SQL>update.sql</SQL>
+        </Version>
+        <Version nr="1113">
+            <CreateDate>2017-11-22</CreateDate>
+        </Version>
+        <Version nr="1114">
+            <CreateDate>2017-12-11</CreateDate>
+        </Version>
+        <Version nr="1115">
+            <CreateDate>2018-01-31</CreateDate>
+        </Version>
+        <Version nr="1116">
+            <CreateDate>2018-04-20</CreateDate>
+        </Version>
+		<Version nr="1117">
+            <CreateDate>2018-09-29</CreateDate>
+        </Version>
+        <Version nr="1118">
+            <CreateDate>2019-04-08</CreateDate>
+        </Version>
+        <Version nr="1119">
+            <CreateDate>2019-11-04</CreateDate>
+        </Version>
+        <Version nr="1120">
+            <CreateDate>2020-01-21</CreateDate>
+        </Version>
+        <Version nr="1121">
+            <CreateDate>2020-10-01</CreateDate>
+        </Version>
+
+    <Hooks>
+        <Hook id="23">nn_account_page.php</Hook>
+        <Hook id="75">nn_order_comments.php</Hook>
+        <Hook id="131">nn_session_reset.php</Hook>
+        <Hook id="132">nn_request_handler.php</Hook>
+        <Hook id="140">nn_phpquery.php</Hook>
+        <Hook id="153">nn_mail_subject.php</Hook>
+        <Hook id="207">nn_orderstatus.php</Hook>
+    </Hooks>
+
+    <Adminmenu>
+        <Customlink sort="0">
+            <Name>Info</Name>
+            <Filename>info.php</Filename>
+        </Customlink>
+
+        <Settingslink sort="1">
+            <Name>Novalnet Haupteinstellungen</Name>
+            <Setting type="text" initialValue="Y" sort="0" conf="N">
+                <Name>Novalnet Haupteinstellungen</Name>
+                <ValueName>novalnet_globale_konfiguration</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="1" conf="Y">
+                <Name>Aktivierungsschlüssel des Produkts</Name>
+                <Description>Novalnet-Aktivierungsschlüssel für das Produkt eingeben. Um diesen Aktivierungschlüssel für das Produkt zu erhalten, gehen Sie zum Novalnet-Admin-Portal - Projekte: Informationen zum jeweiligen Projekt - Parameter Ihres Shops: API Signature (Aktivierungsschlüssel des Produkts).</Description>
+                <ValueName>novalnet_public_key</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="2" conf="Y">
+                <Name>Händler-ID</Name>
+                <ValueName>vendorid</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="3" conf="Y">
+                <Name>Authentifizierungscode</Name>
+                <ValueName>authcode</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="4" conf="Y">
+                <Name>Projekt-ID</Name>
+                <ValueName>productid</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="5" conf="Y">
+                <Name>Tarif-ID</Name>
+                <Description>Novalnet-Tarif-ID auswählen</Description>
+                <ValueName>tariffid</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="6" conf="Y">
+                <Name>Zahlungs-Zugriffsschlüssel</Name>
+                <ValueName>key_password</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="240" sort="7" conf="Y">
+                <Name>Zeitlimit der Schnittstelle (in Sekunden)</Name>
+                <Description>Falls die Verarbeitungszeit der Bestellung das Zeitlimit der Schnittstelle überschreitet, wird die Bestellung nicht ausgeführt</Description>
+                <ValueName>gateway_timeout</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="8" conf="Y">
+                <Name>Partner-ID</Name>
+                <Description>Geben Sie die Partner-ID der Person / des Unternehmens ein, welche / welches Ihnen Novalnet empfohlen hat</Description>
+                <ValueName>referrerid</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="9" conf="Y">
+                <Name>Novalnet-Transaktionsdetails speichern</Name>
+                <Description>Wenn dies aktiviert ist, werden die Novalnet-Transaktionsdetails zusammen mit den Kundenkommentaren gespeichert</Description>
+                <ValueName>display_order_comments</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="Y" sort="10" conf="N">
+                <Name>Verwaltung des Bestellstatus für ausgesetzte Zahlungen</Name>
+                <ValueName>novalnet_bestellstatus_verwaltung</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="11" conf="Y">
+                <Name>On-hold-Bestellstatus</Name>
+                <ValueName>confirm_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="12" conf="Y">
+                <Name>Bestellstatus für Stornierung</Name>
+                <ValueName>cancel_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="Y" sort="13" conf="N">
+                <Name>Verwaltung des Händlerskripts</Name>
+                <ValueName>novalnet_callback_scripts</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="14" conf="Y">
+                <Name>Deaktivieren Sie die IP-Adresskontrolle (nur zu Testzwecken)</Name>
+                <Description>Diese Option ermöglicht eine manuelle Ausführung. Bitte deaktivieren Sie diese Option, bevor Sie Ihren Shop in den LIVE-Modus schalten, um nicht autorisierte Zugriffe von externen Parteien (außer von Novalnet) zu vermeiden.</Description>
+                <ValueName>callback_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="15" conf="Y">
+                <Name>URL für Benachrichtigungen</Name>
+                <Description>Der URL für Benachrichtigungen dient dazu, Ihre Datenbank / Ihr System auf einem aktuellen Stand zu halten &lt;br&gt; und den Novalnet-Transaktionsstatus abzugleichen</Description>
+                <ValueName>callback_notify_url</ValueName>
+            </Setting>
+        </Settingslink>
+
+        <Settingslink sort="2">
+            <Name>Novalnet-Zahlungseinstellungen</Name>
+            <Setting type="text" initialValue="Y" sort="0" conf="N">
+                <Name>Kreditkarte</Name>
+                <ValueName>novalnet_cc</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="1" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_cc_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="2" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_cc_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="3" conf="Y">
+                <Name>3D-Secure aktivieren</Name>
+                <Description>3D-Secure wird für Kreditkarten aktiviert. Die kartenausgebende Bank fragt vom Käufer ein Passwort ab, welches helfen soll, betrügerische Zahlungen zu verhindern. &lt;br&gt; Dies kann von der kartenausgebenden Bank als Beweis verwendet werden, dass der Käufer tatsächlich der Inhaber der Kreditkarte ist.&lt;br&gt; Damit soll das Risiko von Chargebacks verringert werden.</Description>
+                <ValueName>cc3d_active_mode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="4" conf="Y">
+                <Name>3D-Secure-Zahlungen unter vorgegebenen Bedingungen durchführen</Name>
+                <Description>Wenn 3D-Secure in dem darüberliegenden Feld nicht aktiviert ist, sollen 3D-Secure-Zahlungen nach den Einstellungen zum Modul im Novalnet-Admin-Portal unter "3D-Secure-Zahlungen durchführen (gemäß vordefinierten Filtern und Einstellungen)" durchgeführt werden.
+
+                Wenn die vordefinierten Filter und Einstellungen des Moduls "3D-Secure durchführen" zutreffen, wird die Transaktion als 3D-Secure-Transaktion durchgeführt, ansonsten als Nicht-3D-Secure-Transaktion.
+
+                Beachten Sie bitte, dass das Modul "3D-Secure-Zahlungen durchführen (gemäß vordefinierten Filtern und Einstellungen)" im Novalnet-Admin-Portal konfiguriert sein muss, bevor es hier aktiviert wird.
+
+                Für weitere Informationen sehen Sie sich bitte die Beschreibung dieses Betrugsprüfungsmoduls an (unter dem Reiter "Betrugsprüfungsmodule" unterhalb des Menüpunkts "Projekte" für das ausgewähte Projekt im Novalnet-Admin-Portal) oder kontaktieren Sie das Novalnet-Support-Team.</Description>
+                <ValueName>cc3d_fraud_check</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="5" conf="Y">
+                <Name>AMEX-Logo anzeigen</Name>
+                <Description>AMEX-Logo auf der Checkout-Seite anzeigen</Description>
+                <ValueName>cc_amex_accept</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="6" conf="Y">
+                <Name>Maestro-Logo anzeigen</Name>
+                <Description>Maestro-Logo auf der Checkout-Seite anzeigen</Description>
+                <ValueName>cc_maestro_accept</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="7" conf="Y">
+               <Name>Zahlungs Aktion</Name>
+               <ValueName>novalnet_cc_payment_action</ValueName>
+               <SelectboxOptions>
+                  <Option value="0" sort="0">Zahlung einziehen</Option>
+                  <Option value="1" sort="1">Zahlung autorisieren</Option>
+               </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="8" conf="Y">
+                <Name>Mindesttransaktionsbetrag für die Autorisierung (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Übersteigt der Bestellbetrag das genannte Limit, wird die Transaktion, bis zu ihrer Bestätigung durch Sie, auf on hold gesetzt. Sie können das Feld leer lassen, wenn Sie möchten, dass alle Transaktionen als on hold behandelt werden.</Description>
+                <ValueName>novalnet_cc_manual_check_limit</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="9" conf="Y">
+                <Name>Einkaufstyp</Name>
+                <Description>Einkaufstyp auswählen</Description>
+                <ValueName>novalnet_cc_extensive_option</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Kauf mit einem Klick</Option>
+                    <Option value="2" sort="2">Transaktionen mit Betrag 0</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="10" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_cc_set_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="Y" sort="11" conf="N">
+                <Name>CSS-Einstellungen für den iFrame mit Kreditkartendaten</Name>
+                <ValueName>novalnet_cc_form_style</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="12" conf="Y">
+                <Name>Beschriftung</Name>
+                <ValueName>novalnet_cc_form_label</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="border-color: #cccccc; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset; color: #000; height: 34px; padding: 6px 12px; transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;" sort="13" conf="Y">
+                <Name>Eingabefeld</Name>
+                <ValueName>novalnet_cc_form_input</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="body{ color: #9a9a9a; font-family: sans-serif; font-size: 13px } .input-group{ width: 50%; float:left; margin-bottom: 2px } .label-group{ margin-bottom: 5px; } .form-group{ padding-right: 15px; } .form-group label{ text-transform: uppercase; font-size: 12px; }" sort="14" conf="Y">
+                <Name>Text für das CSS</Name>
+                <ValueName>novalnet_cc_form_css</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="Y" sort="15" conf="N">
+                <Name>Lastschrift SEPA</Name>
+                <ValueName>novalnet_sepa</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="16" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_sepa_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="17" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_sepa_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="18" conf="Y">
+                <Name>Abstand (in Tagen) bis zum SEPA-Einzugsdatum</Name>
+                <Description>Geben Sie die Anzahl der Tage ein, nach denen die Zahlung verarbeitet werden soll (muss zwischen 2 und 14 Tagen liegen)</Description>
+                <ValueName>sepa_due_date</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="19" conf="Y">
+               <Name>Zahlungs Aktion</Name>
+               <ValueName>novalnet_sepa_payment_action</ValueName>
+               <SelectboxOptions>
+                  <Option value="0" sort="0">Zahlung einziehen</Option>
+                  <Option value="1" sort="1">Zahlung autorisieren</Option>
+               </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="20" conf="Y">
+                <Name>Mindesttransaktionsbetrag für die Autorisierung (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Übersteigt der Bestellbetrag das genannte Limit, wird die Transaktion, bis zu ihrer Bestätigung durch Sie, auf on hold gesetzt. Sie können das Feld leer lassen, wenn Sie möchten, dass alle Transaktionen als on hold behandelt werden.</Description>
+                <ValueName>novalnet_sepa_manual_check_limit</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="21" conf="Y">
+                <Name>Einkaufstyp</Name>
+                <Description>Einkaufstyp auswählen</Description>
+                <ValueName>novalnet_sepa_extensive_option</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Kauf mit einem Klick</Option>
+                    <Option value="2" sort="2">Transaktionen mit Betrag 0</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="22" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_sepa_set_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="23" conf="Y">
+                <Name>Betrugsprüfung aktivieren</Name>
+                <Description>Um den Käufer einer Transaktion zu authentifizieren, werden die PIN automatisch generiert und an den Käufer geschickt.&lt;br&gt;Dieser Dienst wird nur für Kunden aus DE, AT und CH angeboten</Description>
+                <ValueName>novalnet_sepa_pin_by_callback</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Keiner</Option>
+                    <Option value="1" sort="1">PIN-by-Callback</Option>
+                    <Option value="2" sort="2">PIN-by-SMS</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="24" conf="Y">
+                <Name>Mindestwarenwert für Betrugsprüfungsmodul (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Geben Sie den Mindestwarenwert ein, von dem ab das Betrugsprüfungsmodul aktiviert sein soll</Description>
+                <ValueName>novalnet_sepa_pin_amount</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="25" conf="N">
+                <Name>Einstellungen für die Zahlungsgarantie</Name>
+                <ValueName>novalnet_sepa_guarantee_control</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="26" conf="Y">
+                <Name>Zahlungsgarantie aktivieren</Name>
+                <ValueName>novalnet_sepa_guarantee</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="27" conf="Y">
+                <Name>Mindestbestellbetrag (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Diese Einstellung überschreibt die Standardeinstellung für den Mindest-Bestellbetrag.&lt;br&gt;Anmerkung: der Mindest-Bestellbetrag sollte größer oder gleich 9,99 EUR sein.</Description>
+                <ValueName>novalnet_sepa_guarantee_min_amount</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="28" conf="Y">
+                <Name>Zahlung ohne Zahlungsgarantie erzwingen</Name>
+                <Description>Falls die Zahlungsgarantie aktiviert ist (wahr), die oben genannten Anforderungen jedoch nicht erfüllt werden,&lt;br&gt; soll die Zahlung ohne Zahlungsgarantie verarbeitet werden</Description>
+                <ValueName>novalnet_sepa_guarantee_force</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="29" conf="Y">
+                <Name>Bestellstatus der ausstehenden Zahlung</Name>
+                <ValueName>novalnet_sepa_guarantee_pending_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="30" conf="N">
+                <Name>Kauf auf Rechnung</Name>
+                <ValueName>novalnet_invoice</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="31" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_invoice_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="32" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_invoice_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="33" conf="Y">
+                <Name>Fälligkeitsdatum (in Tagen)</Name>
+                <Description>Geben Sie die Anzahl der Tage ein, binnen derer die Zahlung bei Novalnet eingehen soll (muss größer als 7 Tage sein).&lt;br&gt; Falls dieses Feld leer ist, werden 14 Tage als Standard-Zahlungsfrist gesetzt</Description>
+                <ValueName>invoice_duration</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="34" conf="Y">
+               <Name>Zahlungs Aktion</Name>
+               <ValueName>novalnet_invoice_payment_action</ValueName>
+               <SelectboxOptions>
+                  <Option value="0" sort="0">Zahlung einziehen</Option>
+                  <Option value="1" sort="1">Zahlung autorisieren</Option>
+               </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="35" conf="Y">
+                <Name>Mindesttransaktionsbetrag für die Autorisierung (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Übersteigt der Bestellbetrag das genannte Limit, wird die Transaktion, bis zu ihrer Bestätigung durch Sie, auf on hold gesetzt. Sie können das Feld leer lassen, wenn Sie möchten, dass alle Transaktionen als on hold behandelt werden.</Description>
+                <ValueName>novalnet_invoice_manual_check_limit</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="36" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_invoice_set_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="37" conf="Y">
+                <Name>Callback-Bestellstatus</Name>
+                <ValueName>novalnet_invoice_callback_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="38" conf="Y">
+                <Name>Betrugsprüfung aktivieren</Name>
+                <Description>Um den Käufer einer Transaktion zu authentifizieren, werden die PIN automatisch generiert und an den Käufer geschickt.&lt;br&gt;Dieser Dienst wird nur für Kunden aus DE, AT und CH angeboten</Description>
+                <ValueName>novalnet_invoice_pin_by_callback</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Keiner</Option>
+                    <Option value="1" sort="1">PIN-by-Callback</Option>
+                    <Option value="2" sort="2">PIN-by-SMS</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="39" conf="Y">
+                <Name>Mindestwarenwert für Betrugsprüfungsmodul (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Geben Sie den Mindestwarenwert ein, von dem ab das Betrugsprüfungsmodul aktiviert sein soll</Description>
+                <ValueName>novalnet_invoice_pin_amount</ValueName>
+            </Setting>
+            <Setting type="text" initialValue="" sort="40" conf="N">
+                <Name>Einstellungen für die Zahlungsgarantie</Name>
+                <ValueName>novalnet_invoice_guarantee_control</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="41" conf="Y">
+                <Name>Zahlungsgarantie aktivieren</Name>
+                <ValueName>novalnet_invoice_guarantee</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="42" conf="Y">
+                <Name>Mindestbestellbetrag (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Diese Einstellung überschreibt die Standardeinstellung für den Mindest-Bestellbetrag.&lt;br&gt;Anmerkung: der Mindest-Bestellbetrag sollte größer oder gleich  9,99 EUR sein.</Description>
+                <ValueName>novalnet_invoice_guarantee_min_amount</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="43" conf="Y">
+                <Name>Zahlung ohne Zahlungsgarantie erzwingen</Name>
+                <Description>Falls die Zahlungsgarantie aktiviert ist (wahr), die oben genannten Anforderungen jedoch nicht erfüllt werden,&lt;br&gt; soll die Zahlung ohne Zahlungsgarantie verarbeitet werden</Description>
+                <ValueName>novalnet_invoice_guarantee_force</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="44" conf="Y">
+                <Name>Bestellstatus der ausstehenden Zahlung</Name>
+                <ValueName>novalnet_invoice_guarantee_pending_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="45" conf="N">
+                <Name>Vorauskasse</Name>
+                <ValueName>novalnet_prepayment</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="46" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_prepayment_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="47" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_prepayment_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="48" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_prepayment_set_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="49" conf="Y">
+                <Name>Callback-Bestellstatus</Name>
+                <ValueName>novalnet_prepayment_callback_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="50" conf="N">
+                <Name>Barzahlen</Name>
+                <ValueName>novalnet_cashpayment</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="51" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_cashpayment_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="52" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_cashpayment_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="53" conf="Y">
+                <Name>Verfallsdatum des Zahlscheins (in Tagen)</Name>
+                <Description>Geben Sie die Anzahl der Tage ein, um den Betrag in einer Barzahlen-Partnerfiliale in Ihrer Nähe zu bezahlen. Wenn das Feld leer ist, werden standardmäßig 14 Tage als Fälligkeitsdatum gesetzt.</Description>
+                <ValueName>cashpayment_slip_expiry</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="54" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_cashpayment_set_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="55" conf="Y">
+                <Name>Callback-Bestellstatus</Name>
+                <ValueName>novalnet_cashpayment_callback_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="56" conf="N">
+                <Name>Sofortüberweisung</Name>
+                <ValueName>novalnet_banktransfer</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="57" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_banktransfer_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="58" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_banktransfer_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="59" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_banktransfer_set_order_status</ValueName>
+                <SelectboxOptions>
+                    <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                    <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                    <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                    <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="60" conf="N">
+                <Name>PayPal</Name>
+                <ValueName>novalnet_paypal</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="61" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_paypal_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="62" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_paypal_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="63" conf="Y">
+               <Name>Bearbeitungsmaßnahme</Name>
+               <ValueName>novalnet_paypal_payment_action</ValueName>
+               <SelectboxOptions>
+                  <Option value="0" sort="0">Zahlung einziehen</Option>
+                  <Option value="1" sort="1">Zahlung autorisieren</Option>
+               </SelectboxOptions>
+            </Setting>
+            <Setting type="text" initialValue="" sort="64" conf="Y">
+                <Name>Mindesttransaktionsbetrag für die Autorisierung (in der kleinsten Währungseinheit, z.B. 100 Cent = entsprechen 1.00 EUR)</Name>
+                <Description>Falls der Bestellbetrag das angegebene Limit übersteigt, wird die Transaktion ausgesetzt, bis Sie diese selbst bestätigen. Um diese Option zu verwenden, müssen Sie die Option Billing Agreement (Zahlungsvereinbarung) in Ihrem PayPal-Konto aktiviert haben. Kontaktieren Sie dazu bitte Ihren Kundenbetreuer bei PayPal.</Description>
+                <ValueName>novalnet_paypal_manual_check_limit</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="65" conf="Y">
+                <Name>Einkaufstyp</Name>
+                <Description>Einkaufstyp auswählen</Description>
+                <ValueName>novalnet_paypal_extensive_option</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Kauf mit einem Klick</Option>
+                    <Option value="2" sort="2">Transaktionen mit Betrag 0</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="66" conf="Y">
+                <Name>Bestellstatus der ausstehenden Zahlung</Name>
+                <ValueName>novalnet_paypal_pending_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="67" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_paypal_set_order_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="68" conf="N">
+                <Name>iDEAL</Name>
+                <ValueName>novalnet_ideal</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="69" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_ideal_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="70" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_ideal_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="71" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_ideal_set_order_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="72" conf="N">
+                <Name>eps</Name>
+                <ValueName>novalnet_eps</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="73" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_eps_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="74" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_eps_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="75" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_eps_set_order_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="76" conf="N">
+                <Name>giropay</Name>
+                <ValueName>novalnet_giropay</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="77" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_giropay_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="78" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_giropay_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="79" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_giropay_set_order_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+
+            <Setting type="text" initialValue="Y" sort="80" conf="N">
+                <Name>Przelewy24</Name>
+                <ValueName>novalnet_przelewy24</ValueName>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="81" conf="Y">
+                <Name>Zahlungsart aktivieren</Name>
+                <ValueName>novalnet_przelewy24_enablemode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="0" sort="82" conf="Y">
+                <Name>Testmodus aktivieren</Name>
+                <Description>Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen</Description>
+                <ValueName>novalnet_przelewy24_testmode</ValueName>
+                <SelectboxOptions>
+                    <Option value="0" sort="0">Nein</Option>
+                    <Option value="1" sort="1">Ja</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="83" conf="Y">
+                <Name>Bestellstatus der ausstehenden Zahlung</Name>
+                <ValueName>novalnet_przelewy24_pending_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+            <Setting type="selectbox" initialValue="1" sort="84" conf="Y">
+                <Name>Abschluss-Status der Bestellung</Name>
+                <ValueName>novalnet_przelewy24_set_order_status</ValueName>
+                <SelectboxOptions>
+                <Option value="BESTELLUNG_STATUS_OFFEN" sort="0">offen</Option>
+                <Option value="BESTELLUNG_STATUS_IN_BEARBEITUNG" sort="1">in Bearbeitung</Option>
+                <Option value="BESTELLUNG_STATUS_BEZAHLT" sort="2">bezahlt</Option>
+                <Option value="BESTELLUNG_STATUS_STORNO" sort="3">Storno</Option>
+                </SelectboxOptions>
+            </Setting>
+        </Settingslink>
+
+        <Customlink sort="3">
+            <Name>Novalnet-Bestellungen</Name>
+            <Filename>orders.php</Filename>
+        </Customlink>
+
+        <Customlink sort="4">
+            <Name>Novalnet-Updates</Name>
+            <Filename>novalnet_update.php</Filename>
+        </Customlink>
+
+    </Adminmenu>
+
+    <Emailtemplate>
+        <Template>
+            <Name>E-Mail-Benachrichtigung für Testbuchungen</Name>
+            <Description>Sie erhalten ab jetzt E-Mail-Benachrichtigungen zu jeder Testbestellung im Webshop</Description>
+            <Type>text/html</Type>
+            <ModulId>novalnetnotification</ModulId>
+            <Active>N</Active>
+            <AKZ>0</AKZ>
+            <AGB>0</AGB>
+            <WRB>0</WRB>
+            <TemplateLanguage iso="GER">
+                <Subject>Benachrichtigung zu Novalnet-Testbestellung</Subject>
+                <ContentHtml><![CDATA[Sehr geehrte Kundin,<br><br>
+
+    wir möchten Sie darüber informieren, dass eine Testbestellung ({$Kunde->cBestellNr}) kürzlich in Ihrem Shop durchgeführt wurde. Stellen Sie bitte sicher, dass für Ihr Projekt im Novalnet-Administrationsportal der Live-Modus gesetzt wurde und Zahlungen über Novalnet in Ihrem Shopsystem aktiviert sind.<br><br>
+
+    Ignorieren Sie bitte diese E-Mail, falls die Bestellung von Ihnen zu Testzwecken durchgeführt wurde.<br><br>
+
+    Mit freundlichen Grüßen<br>
+    Novalnet AG]]></ContentHtml>
+                <ContentText><![CDATA[Sehr geehrte Kundin, 
+
+    wir möchten Sie darüber informieren, dass eine Testbestellung ({$Kunde->cBestellNr}) kürzlich in Ihrem Shop durchgeführt wurde. Stellen Sie bitte sicher, dass für Ihr Projekt im Novalnet-Administrationsportal der Live-Modus gesetzt wurde und Zahlungen über Novalnet in Ihrem Shopsystem aktiviert sind.
+
+    Ignorieren Sie bitte diese E-Mail, falls die Bestellung von Ihnen zu Testzwecken durchgeführt wurde.
+
+    Mit freundlichen Grüßen
+    Novalnet AG]]></ContentText>
+            </TemplateLanguage>
+            <TemplateLanguage iso="ENG">
+                <Subject>Novalnet test order notification</Subject>
+                <ContentHtml><![CDATA[Dear client,<br><br>
+
+    We would like to inform you that test order ({$Kunde->cBestellNr}) has been placed in your shop recently. Please make sure your project is in LIVE mode at Novalnet administration portal and Novalnet payments are enabled in your shop system.
+    Please ignore this email if the order has been placed by you for testing purpose.<br><br>
+
+    Regards,<br>
+    Novalnet AG]]></ContentHtml>
+                <ContentText><![CDATA[Dear client,
+
+    We would like to inform you that test order ({$Kunde->cBestellNr}) has been placed in your shop recently. Please make sure your project is in LIVE mode at Novalnet administration portal and Novalnet payments are enabled in your shop system.
+    Please ignore this email if the order has been placed by you for testing purpose.
+
+    Regards,
+    Novalnet AG]]></ContentText>
+            </TemplateLanguage>
+        </Template>
+        <Template>
+            <Name>Email-Benachrichtigung für Callback</Name>
+            <Description />
+            <Type>text/html</Type>
+            <ModulId>novalnetcallbackmail</ModulId>
+            <Active>N</Active>
+            <AKZ>0</AKZ>
+            <AGB>0</AGB>
+            <WRB>0</WRB>
+            <TemplateLanguage iso="GER">
+                <Subject>Novalnet callback script notification</Subject>
+                <ContentHtml><![CDATA[Sehr geehrte Kundin,<br><br>
+
+    {$oPluginMail->cCallbackText}<br><br>
+
+    Mit freundlichen Grüßen<br>
+    Novalnet AG]]></ContentHtml>
+                <ContentText><![CDATA[Sehr geehrte Kundin, 
+
+    {$oPluginMail->cCallbackText}
+
+    Ignorieren Sie bitte diese E-Mail, falls die Bestellung von Ihnen zu Testzwecken durchgeführt wurde.
+
+    Mit freundlichen Grüßen
+    Novalnet AG]]></ContentText>
+            </TemplateLanguage>
+            <TemplateLanguage iso="ENG">
+                <Subject>Novalnet callback script notification</Subject>
+                <ContentHtml><![CDATA[Dear client,<br><br>
+
+    {$oPluginMail->cCallbackText}<br><br>
+
+    Regards,<br>
+    Novalnet AG]]></ContentHtml>
+                <ContentText><![CDATA[Dear client,
+
+    {$oPluginMail->cCallbackText}
+
+    Regards,
+    Novalnet AG]]></ContentText>
+            </TemplateLanguage>
+        </Template>
+    </Emailtemplate>
+
+    <PaymentMethod>
+        <Method>
+            <Name>Novalnet Kreditkarte</Name>
+            <PictureURL>img/novalnet_cc_visa.png</PictureURL>
+            <Sort>1</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>1</PreOrder>
+            <Soap>0</Soap>
+            <Curl>1</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetCreditcard.class.php</ClassFile>
+            <ClassName>NovalnetCreditcard</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_cc_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Kreditkarte</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Kreditkarte</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>Credit Card</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Credit Card</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet Lastschrift SEPA</Name>
+            <PictureURL>img/novalnet_sepa.png</PictureURL>
+            <Sort>2</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>1</PreOrder>
+            <Soap>0</Soap>
+            <Curl>1</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetSepa.class.php</ClassFile>
+            <ClassName>NovalnetSepa</ClassName>
+            <AdditionalTemplateFile>template/novalnet_sepa_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Lastschrift SEPA</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Lastschrift SEPA</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>Direct Debit SEPA</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Direct Debit SEPA</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet Kauf auf Rechnung</Name>
+            <PictureURL>img/novalnet_invoice.png</PictureURL>
+            <Sort>3</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>1</PreOrder>
+            <Soap>0</Soap>
+            <Curl>1</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetInvoice.class.php</ClassFile>
+            <ClassName>NovalnetInvoice</ClassName>
+            <AdditionalTemplateFile>template/novalnet_invoice_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Kauf auf Rechnung</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Kauf auf Rechnung</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>Invoice</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Invoice</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet Vorauskasse</Name>
+            <PictureURL>img/novalnet_prepayment.png</PictureURL>
+            <Sort>4</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>1</PreOrder>
+            <Soap>0</Soap>
+            <Curl>1</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetPrepayment.class.php</ClassFile>
+            <ClassName>NovalnetPrepayment</ClassName>
+            <AdditionalTemplateFile>template/novalnet_prepayment_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Vorauskasse</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Vorauskasse</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>Prepayment</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Prepayment</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet Barzahlen</Name>
+            <PictureURL>img/novalnet_cashpayment.png</PictureURL>
+            <Sort>5</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>1</PreOrder>
+            <Soap>0</Soap>
+            <Curl>1</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetCashpayment.class.php</ClassFile>
+            <ClassName>NovalnetCashpayment</ClassName>
+            <AdditionalTemplateFile>template/novalnet_cashpayment_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Barzahlen</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Barzahlen</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>Barzahlen</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Barzahlen</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet Sofortüberweisung</Name>
+            <PictureURL>img/novalnet_instantbank.png</PictureURL>
+            <Sort>6</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>0</PreOrder>
+            <Soap>0</Soap>
+            <Curl>0</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetBanktransfer.class.php</ClassFile>
+            <ClassName>NovalnetBanktransfer</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_redirection_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Sofortüberweisung</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Sofortüberweisung</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>Instant Bank Transfer</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Instant Bank Transfer</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet PayPal</Name>
+            <PictureURL>img/novalnet_paypal.png</PictureURL>
+            <Sort>7</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>0</PreOrder>
+            <Soap>0</Soap>
+            <Curl>0</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetPaypal.class.php</ClassFile>
+            <ClassName>NovalnetPaypal</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_paypal_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>PayPal</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>PayPal</InfoText>
+            </MethodLanguage>
+                <MethodLanguage iso="ENG">
+                <Name>PayPal</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>PayPal</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet iDEAL</Name>
+            <PictureURL>img/novalnet_ideal.png</PictureURL>
+            <Sort>8</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>0</PreOrder>
+            <Soap>0</Soap>
+            <Curl>0</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetIdeal.class.php</ClassFile>
+            <ClassName>NovalnetIdeal</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_redirection_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>iDEAL</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>iDEAL</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>iDEAL</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>iDEAL</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet eps</Name>
+            <PictureURL>img/novalnet_eps.png</PictureURL>
+            <Sort>9</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>0</PreOrder>
+            <Soap>0</Soap>
+            <Curl>0</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetEps.class.php</ClassFile>
+            <ClassName>NovalnetEps</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_redirection_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>eps</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>eps</InfoText>
+            </MethodLanguage>
+            <MethodLanguage iso="ENG">
+                <Name>eps</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>eps</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet giropay</Name>
+            <PictureURL>img/novalnet_giropay.png</PictureURL>
+            <Sort>10</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>0</PreOrder>
+            <Soap>0</Soap>
+            <Curl>0</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetGiropay.class.php</ClassFile>
+            <ClassName>NovalnetGiropay</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_redirection_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>giropay</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>giropay</InfoText>
+            </MethodLanguage>
+                <MethodLanguage iso="ENG">
+                <Name>giropay</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>giropay</InfoText>
+            </MethodLanguage>
+        </Method>
+
+        <Method>
+            <Name>Novalnet Przelewy24</Name>
+            <PictureURL>img/novalnet_przelewy24.png</PictureURL>
+            <Sort>11</Sort>
+            <SendMail>0</SendMail>
+            <Provider>Novalnet</Provider>
+            <TSCode>OTHER</TSCode>
+            <PreOrder>0</PreOrder>
+            <Soap>0</Soap>
+            <Curl>0</Curl>
+            <Sockets>0</Sockets>
+            <ClassFile>classes/NovalnetPrzelewy24.class.php</ClassFile>
+            <ClassName>NovalnetPrzelewy24</ClassName>
+            <TemplateFile>template/bestellabschluss.tpl</TemplateFile>
+            <AdditionalTemplateFile>template/novalnet_redirection_additional.tpl</AdditionalTemplateFile>
+            <MethodLanguage iso="GER">
+                <Name>Przelewy24</Name>
+                <ChargeName>Gebühr</ChargeName>
+                <InfoText>Przelewy24</InfoText>
+            </MethodLanguage>
+                <MethodLanguage iso="ENG">
+                <Name>Przelewy24</Name>
+                <ChargeName>Fee</ChargeName>
+                <InfoText>Przelewy24</InfoText>
+            </MethodLanguage>
+        </Method>
+    </PaymentMethod>
+
+    <Locales>
+        <Variable>
+            <Name>__NN_payment_method_name_creditcard</Name>
+            <Description>Credit card payment name for information text</Description>
+            <VariableLocalized iso="GER">Kreditkarte</VariableLocalized>
+            <VariableLocalized iso="ENG">Credit Card</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_sepa</Name>
+            <Description>Direct Debit SEPA payment name for information text</Description>
+            <VariableLocalized iso="GER">Lastschrift SEPA</VariableLocalized>
+            <VariableLocalized iso="ENG">Direct Debit SEPA</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_invoice</Name>
+            <Description>Invoice payment name for information text</Description>
+            <VariableLocalized iso="GER">Kauf auf Rechnung</VariableLocalized>
+            <VariableLocalized iso="ENG">Invoice</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_prepayment</Name>
+            <Description>Prepayment payment name for information text</Description>
+            <VariableLocalized iso="GER">Vorauskasse</VariableLocalized>
+            <VariableLocalized iso="ENG">Prepayment</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_cashpayment</Name>
+            <Description>Cashpayment payment name for information text</Description>
+            <VariableLocalized iso="GER">Barzahlen</VariableLocalized>
+            <VariableLocalized iso="ENG">Barzahlen</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_banktransfer</Name>
+            <Description>Instant banktransfer payment name for information text</Description>
+            <VariableLocalized iso="GER">Sofortüberweisung</VariableLocalized>
+            <VariableLocalized iso="ENG">Instant Bank Transfer</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_ideal</Name>
+            <Description>Ideal payment name for information text</Description>
+            <VariableLocalized iso="GER">iDEAL</VariableLocalized>
+            <VariableLocalized iso="ENG">iDEAL</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_paypal</Name>
+            <Description>Paypal payment name for information text</Description>
+            <VariableLocalized iso="GER">PayPal</VariableLocalized>
+            <VariableLocalized iso="ENG">PayPal</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_eps</Name>
+            <Description>EPS payment name for information text</Description>
+            <VariableLocalized iso="GER">eps</VariableLocalized>
+            <VariableLocalized iso="ENG">eps</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_giropay</Name>
+            <Description>Giropay payment name for information text</Description>
+            <VariableLocalized iso="GER">giropay</VariableLocalized>
+            <VariableLocalized iso="ENG">giropay</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_payment_method_name_przelewy24</Name>
+            <Description>Przelewy24 payment name for information text</Description>
+            <VariableLocalized iso="GER">Przelewy24</VariableLocalized>
+            <VariableLocalized iso="ENG">Przelewy24</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_type</Name>
+            <Description>Credit card type</Description>
+            <VariableLocalized iso="GER">Kartentyp</VariableLocalized>
+            <VariableLocalized iso="ENG">Type of card</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_select_type</Name>
+            <Description>Select text</Description>
+            <VariableLocalized iso="GER">--Auswählen--</VariableLocalized>
+            <VariableLocalized iso="ENG">--Select--</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_name</Name>
+            <Description>Credit Card holder label</Description>
+            <VariableLocalized iso="GER">Name des Karteninhabers</VariableLocalized>
+            <VariableLocalized iso="ENG">Card holder name</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_name_input</Name>
+            <Description>Credit Card holder placeholder</Description>
+            <VariableLocalized iso="GER">Name auf der Kreditkarte</VariableLocalized>
+            <VariableLocalized iso="ENG">Name on card</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_number</Name>
+            <Description>Credit Card number label</Description>
+            <VariableLocalized iso="GER">Kreditkartennummer</VariableLocalized>
+            <VariableLocalized iso="ENG">Card number</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_number_input</Name>
+            <Description>Credit Card number placeholder</Description>
+            <VariableLocalized iso="GER">XXXX XXXX XXXX XXXX</VariableLocalized>
+            <VariableLocalized iso="ENG">XXXX XXXX XXXX XXXX</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_date</Name>
+            <Description>Credit Card expiry date label</Description>
+            <VariableLocalized iso="GER">Ablaufdatum</VariableLocalized>
+            <VariableLocalized iso="ENG">Expiry date</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_month</Name>
+            <Description>Credit Card expiry month</Description>
+            <VariableLocalized iso="GER">Monat</VariableLocalized>
+            <VariableLocalized iso="ENG">Month</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_year</Name>
+            <Description>Credit Card expiry year</Description>
+            <VariableLocalized iso="GER">Jahr</VariableLocalized>
+            <VariableLocalized iso="ENG">Year</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_date_input</Name>
+            <Description>Credit Card expiry date placeholder</Description>
+            <VariableLocalized iso="GER">MM / YYYY</VariableLocalized>
+            <VariableLocalized iso="ENG">MM / YYYY</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_cvc</Name>
+            <Description>Credit Card CVC label</Description>
+            <VariableLocalized iso="GER">CVC/CVV/CID</VariableLocalized>
+            <VariableLocalized iso="ENG">CVC/CVV/CID</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_cvc_input</Name>
+            <Description>Credit Card CVC placeholder</Description>
+            <VariableLocalized iso="GER">XXX</VariableLocalized>
+            <VariableLocalized iso="ENG">XXX</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_cvc_hint</Name>
+            <Description>Credit Card CVC hint text</Description>
+            <VariableLocalized iso="GER">Was ist das?</VariableLocalized>
+            <VariableLocalized iso="ENG">what is this?</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_error</Name>
+            <Description>Credit Card error text</Description>
+            <VariableLocalized iso="GER">Ihre Kreditkartendaten sind ungültig</VariableLocalized>
+            <VariableLocalized iso="ENG">Your credit card details are invalid</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_desc</Name>
+            <Description>Credit Card payment description</Description>
+            <VariableLocalized iso="GER">Der Betrag wird von Ihrer Kreditkarte abgebucht, sobald die Bestellung abgeschickt wird</VariableLocalized>
+            <VariableLocalized iso="ENG">The amount will be debited from your credit card once the order is submitted</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_credit_card_payment_name</Name>
+            <Description>Novalnet Credit Card payment name</Description>
+            <VariableLocalized iso="GER">Kreditkarte</VariableLocalized>
+            <VariableLocalized iso="ENG">Credit Card</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_payment_name</Name>
+            <Description>Novalnet Direct Debit SEPA payment name</Description>
+            <VariableLocalized iso="GER">Novalnet Lastschrift SEPA</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet Direct Debit SEPA</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_holder_name</Name>
+            <Description>Sepa account holder name text</Description>
+            <VariableLocalized iso="GER">Kontoinhaber</VariableLocalized>
+            <VariableLocalized iso="ENG">Account holder</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_account_number</Name>
+            <Description>Sepa account number text</Description>
+            <VariableLocalized iso="GER">IBAN</VariableLocalized>
+            <VariableLocalized iso="ENG">IBAN</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_error</Name>
+            <Description>Sepa validation error message</Description>
+            <VariableLocalized iso="GER">Ihre Kontodaten sind ungültig</VariableLocalized>
+            <VariableLocalized iso="ENG">Your account details are invalid</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_mandate_text</Name>
+            <Description>Sepa mandate overlay confirmation text</Description>
+            <VariableLocalized iso="GER">Ich erteile hiermit das SEPA-Lastschriftmandat (elektronische Übermittlung) und bestätige, dass die Bankverbindung korrekt ist.</VariableLocalized>
+            <VariableLocalized iso="ENG">I hereby grant the mandate for the SEPA direct debit (electronic transmission) and confirm that the given bank details are correct!</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_mandate_instruction_one</Name>
+            <Description>Sepa mandate overlay instruction row one</Description>
+            <VariableLocalized iso="GER">Ich ermächtige den Zahlungsempfänger, Zahlungen von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von dem Zahlungsempfänger auf mein Konto gezogenen Lastschriften einzulösen.</VariableLocalized>
+            <VariableLocalized iso="ENG">I authorise (A) Novalnet AG to send instructions to my bank to debit my account and (B) my bank to debit my account in accordance with the instructions from Novalnet AG.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_mandate_instruction_two</Name>
+            <Description>Sepa mandate overlay instruction row two</Description>
+            <VariableLocalized iso="GER">Gläubiger-Identifikationsnummer: DE53ZZZ00000004253</VariableLocalized>
+            <VariableLocalized iso="ENG">Creditor identifier: DE53ZZZ00000004253</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_mandate_instruction_three</Name>
+            <Description>Sepa mandate overlay instruction row three</Description>
+            <VariableLocalized iso="GER">&lt;b&gt;Hinweis:&lt;/b&gt; Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.</VariableLocalized>
+            <VariableLocalized iso="ENG">&lt;b&gt;Note:&lt;/b&gt; You are entitled to a refund from your bank under the terms and conditions of your agreement with bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_description</Name>
+            <Description>Sepa payment description</Description>
+            <VariableLocalized iso="GER">Ihr Konto wird nach Abschicken der Bestellung belastet.</VariableLocalized>
+            <VariableLocalized iso="ENG">Your account will be debited upon the order submission</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payment_name</Name>
+            <Description>Novalnet invoice payment name</Description>
+            <VariableLocalized iso="GER">Novalnet Kauf auf Rechnung</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet Invoice</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_duedate</Name>
+            <Description>Invoice duedate text</Description>
+            <VariableLocalized iso="GER">Fälligkeitsdatum: </VariableLocalized>
+            <VariableLocalized iso="ENG">Due date: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payments_comments</Name>
+            <Description>Invoice payments comment head text</Description>
+            <VariableLocalized iso="GER">Überweisen Sie bitte den Betrag an die unten aufgeführte Bankverbindung unseres Zahlungsdienstleisters Novalnet.</VariableLocalized>
+            <VariableLocalized iso="ENG">Please transfer the amount to the below mentioned account details of our payment processor Novalnet</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_guarantee_payments_comments</Name>
+            <Description>Guarantee payments comment text</Description>
+            <VariableLocalized iso="GER">Diese Transaktion wird mit Zahlungsgarantie verarbeitet</VariableLocalized>
+            <VariableLocalized iso="ENG">This is processed as a guarantee payment</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payments_holder</Name>
+            <Description>Invoice payments account holder text</Description>
+            <VariableLocalized iso="GER">Kontoinhaber: </VariableLocalized>
+            <VariableLocalized iso="ENG">Account holder: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payments_amount</Name>
+            <Description>Invoice payments order amount text</Description>
+            <VariableLocalized iso="GER">Betrag: </VariableLocalized>
+            <VariableLocalized iso="ENG">Amount: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payments_reference</Name>
+            <Description>Invoice payments reference text</Description>
+            <VariableLocalized iso="GER">%s Verwendungszweck</VariableLocalized>
+            <VariableLocalized iso="ENG">Payment Reference%s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_description</Name>
+            <Description>Invoice payments description</Description>
+            <VariableLocalized iso="GER">Nachdem Sie die Bestellung abgeschickt haben, erhalten Sie eine Email mit den Bankdaten, um die Zahlung durchzuführen</VariableLocalized>
+            <VariableLocalized iso="ENG">Once you've submitted the order, you will receive an e-mail with account details to make payment</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_order_number_text</Name>
+            <Description>Order number text for reference</Description>
+            <VariableLocalized iso="GER">Bestellnummer </VariableLocalized>
+            <VariableLocalized iso="ENG">Order number </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payments_single_reference_text</Name>
+            <Description>Invoice payments reference field not enabled error</Description>
+            <VariableLocalized iso="GER">Bitte verwenden Sie nur den unten angegebenen Verwendungszweck für die Überweisung, da nur so Ihr Geldeingang zugeordnet werden kann</VariableLocalized>
+            <VariableLocalized iso="ENG">Please use the following payment reference for your money transfer, as only through this way your payment is matched and assigned to the order</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_payments_multiple_reference_text</Name>
+            <Description>Invoice payments reference field not enabled error</Description>
+            <VariableLocalized iso="GER">Bitte verwenden Sie einen der unten angegebenen Verwendungszwecke für die Überweisung, da nur so Ihr Geldeingang zugeordnet werden kann:</VariableLocalized>
+            <VariableLocalized iso="ENG">Please use any one of the following references as the payment reference, as only through this way your payment is matched and assigned to the order:</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_cashpayment_description</Name>
+            <Description>Cashpayment payments description</Description>
+            <VariableLocalized iso="GER">Mit Abschluss der Bestellung bekommen Sie einen Zahlschein angezeigt, den Sie sich ausdrucken oder auf Ihr Handy schicken lassen können. Bezahlen Sie den Online-Einkauf mit Hilfe des Zahlscheins an der Kasse einer Barzahlen-Partnerfiliale</VariableLocalized>
+            <VariableLocalized iso="ENG">After completing your order you get a payment slip from Barzahlen that you can easily print out or have it sent via SMS to your mobile phone. With the help of that payment slip you can pay your online purchase at one of our retail partners (e.g. supermarket).</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_cashpayment_expiry_date</Name>
+            <Description>Cashpayment expiry date text</Description>
+            <VariableLocalized iso="GER">Verfallsdatum des Zahlscheins: </VariableLocalized>
+            <VariableLocalized iso="ENG">Slip expiry date: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_cashpayment_nearest_store_details</Name>
+            <Description>Cashpayment nearest store details</Description>
+            <VariableLocalized iso="GER">Barzahlen-Partnerfiliale in Ihrer Nähe</VariableLocalized>
+            <VariableLocalized iso="ENG">Store(s) near you</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_cashpayment_slipurl</Name>
+            <Description>Cashpayment slip URL text</Description>
+            <VariableLocalized iso="GER">Bezahlen mit Barzahlen</VariableLocalized>
+            <VariableLocalized iso="ENG">Pay now with Barzahlen</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_paypal_desc</Name>
+            <Description>PayPal payment description</Description>
+            <VariableLocalized iso="GER">Sobald die Bestellung abgeschickt wurde, wird die Zahlung bei Novalnet als Referenztransaktion verarbeitet</VariableLocalized>
+            <VariableLocalized iso="ENG">Once the order is submitted, the payment will be processed as a reference transaction at Novalnet</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_guarantee_country_error</Name>
+            <Description>Guarantee basic requirement for country not met error</Description>
+            <VariableLocalized iso="GER">Die Zahlung kann nicht verarbeitet werden, da die grundlegenden Anforderungen für die Zahlungsgarantie nicht erfüllt wurden (Als Land ist nur Deutschland, Österreich oder Schweiz erlaubt)</VariableLocalized>
+            <VariableLocalized iso="ENG">The payment cannot be processed, because the basic requirements for the payment guarantee haven't been met (Only Germany, Austria or Switzerland are allowed)</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_guarantee_currency_error</Name>
+            <Description>Guarantee basic requirement for currency not met error</Description>
+            <VariableLocalized iso="GER">Die Zahlung kann nicht verarbeitet werden, da die grundlegenden Anforderungen für die Zahlungsgarantie nicht erfüllt wurden (Als Währung ist nur EUR erlaubt)</VariableLocalized>
+            <VariableLocalized iso="ENG">The payment cannot be processed, because the basic requirements for the payment guarantee haven't been met (Only EUR currency allowed)</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_guarantee_min_amount_error</Name>
+            <Description>Guarantee basic requirement for minimum amount not met error</Description>
+            <VariableLocalized iso="GER">Die Zahlung kann nicht verarbeitet werden, da die grundlegenden Anforderungen für die Zahlungsgarantie nicht erfüllt wurden (Der Mindestbestellwert beträgt %s %s)</VariableLocalized>
+            <VariableLocalized iso="ENG">The payment cannot be processed, because the basic requirements for the payment guarantee haven't been met (Minimum order amount must be %s %s)</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_guarantee_address_error</Name>
+            <Description>Guarantee basic requirement for address not met error</Description>
+            <VariableLocalized iso="GER">Die Zahlung kann nicht verarbeitet werden, da die grundlegenden Anforderungen für die Zahlungsgarantie nicht erfüllt wurden (Die Lieferadresse muss mit der Rechnungsadresse übereinstimmen)</VariableLocalized>
+            <VariableLocalized iso="ENG">The payment cannot be processed, because the basic requirements for the payment guarantee haven't been met (The shipping address must be the same as the billing address)</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_order_not_sucessful</Name>
+            <Description>Order not completed error message</Description>
+            <VariableLocalized iso="GER">Leider konnte diese Bestellung nicht verarbeitet werden. Bitte geben Sie eine neue Bestellung auf.</VariableLocalized>
+            <VariableLocalized iso="ENG">Unfortunately, this order could not be processed. Please, place a new order.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_javascript_error</Name>
+            <Description>Javascript not enabled message</Description>
+            <VariableLocalized iso="GER">Aktivieren Sie bitte JavaScript in Ihrem Browser, um die Zahlung fortzusetzen</VariableLocalized>
+            <VariableLocalized iso="ENG">Please enable the Javascript in your browser to proceed further with the payment</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_phone_number</Name>
+            <Description>Fraud prevention telephone number text</Description>
+            <VariableLocalized iso="GER">Telefonnummer</VariableLocalized>
+            <VariableLocalized iso="ENG">Telephone number</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_sms</Name>
+            <Description>Fraud prevention mobile number text</Description>
+            <VariableLocalized iso="GER">Mobiltelefonnummer</VariableLocalized>
+            <VariableLocalized iso="ENG">Mobile number</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_pin</Name>
+            <Description>Fraud prevention pin number text</Description>
+            <VariableLocalized iso="GER">PIN zu Ihrer Transaktion</VariableLocalized>
+            <VariableLocalized iso="ENG">Transaction PIN</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_forgot_pin</Name>
+            <Description>Fraud prevention forgot pin text</Description>
+            <VariableLocalized iso="GER">PIN vergessen?</VariableLocalized>
+            <VariableLocalized iso="ENG">Forgot your PIN?</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_telephone_error</Name>
+            <Description>Fraud prevention telephone number error</Description>
+            <VariableLocalized iso="GER">Geben Sie bitte Ihre Telefonnummer ein</VariableLocalized>
+            <VariableLocalized iso="ENG">Please enter your telephone number</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_mobile_error</Name>
+            <Description>Fraud prevention mobile number error</Description>
+            <VariableLocalized iso="GER">Geben Sie bitte Ihre Mobiltelefonnummer ein</VariableLocalized>
+            <VariableLocalized iso="ENG">Please enter your mobile number</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_pin_error</Name>
+            <Description>Fraud prevention pin number error</Description>
+            <VariableLocalized iso="GER">Die von Ihnen eingegebene PIN ist falsch</VariableLocalized>
+            <VariableLocalized iso="ENG">The PIN you entered is incorrect</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_pin_error_empty</Name>
+            <Description>Fraud prevention pin number error</Description>
+            <VariableLocalized iso="GER">PIN eingeben</VariableLocalized>
+            <VariableLocalized iso="ENG">Enter your PIN</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_confirm_btn</Name>
+            <Description>Admin overlay confirm button text</Description>
+            <VariableLocalized iso="GER">Bestätigen</VariableLocalized>
+            <VariableLocalized iso="ENG">Confirm</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_tid_label</Name>
+            <Description>Transaction ID text</Description>
+            <VariableLocalized iso="GER">Novalnet Transaktions-ID: </VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet transaction ID: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_paypal_tid_label</Name>
+            <Description>Transaction ID text</Description>
+            <VariableLocalized iso="GER">PayPal Transaktions-ID: </VariableLocalized>
+            <VariableLocalized iso="ENG">PayPal transaction ID: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_redirection_text</Name>
+            <Description>Redirection to Novalnet server text</Description>
+            <VariableLocalized iso="GER">Nach der erfolgreichen Überprüfung werden Sie auf die abgesicherte Novalnet-Bestellseite umgeleitet, um die Zahlung fortzusetzen.</VariableLocalized>
+            <VariableLocalized iso="ENG">After the successful verification, you will be redirected to Novalnet secure order page to proceed with the payment.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_redirection_browser_text</Name>
+            <Description>Customer not closing the browser text</Description>
+            <VariableLocalized iso="GER">Bitte schließen Sie den Browser nach der erfolgreichen Zahlung nicht, bis Sie zum Shop zurückgeleitet wurden.</VariableLocalized>
+            <VariableLocalized iso="ENG">Please don&apos;t close the browser after successful payment, until you have been redirected back to the Shop</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_redirection_button_text</Name>
+            <Description>Redirection button text</Description>
+            <VariableLocalized iso="GER">Weiterleitung...</VariableLocalized>
+            <VariableLocalized iso="ENG">Redirecting...</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_test_order</Name>
+            <Description>Test order information text</Description>
+            <VariableLocalized iso="GER">Testbestellung</VariableLocalized>
+            <VariableLocalized iso="ENG">Test order</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_hash_error</Name>
+            <Description>Check response hash value error</Description>
+            <VariableLocalized iso="GER">Während der Umleitung wurden einige Daten geändert. Die Überprüfung des Hashes schlug fehl.</VariableLocalized>
+            <VariableLocalized iso="ENG">While redirecting some data has been changed. The hash check failed.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_guarantee_birthdate</Name>
+            <Description>Birthdate field for guarantee payments</Description>
+            <VariableLocalized iso="GER">Ihr Geburtsdatum</VariableLocalized>
+            <VariableLocalized iso="ENG">Your date of birth</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_age_limit_error</Name>
+            <Description>Age limit error for guarantee payments</Description>
+            <VariableLocalized iso="GER">Sie müssen mindestens 18 Jahre alt sein. </VariableLocalized>
+            <VariableLocalized iso="ENG">You need to be at least 18 years old </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_birthdate_error</Name>
+            <Description>Check valid birthdate entry for guarantee payments</Description>
+            <VariableLocalized iso="GER">Geben Sie bitte Ihr Geburtsdatum ein</VariableLocalized>
+            <VariableLocalized iso="ENG">Please enter your date of birth</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_birthdate_valid_error</Name>
+            <Description>Check valid birthdate entry for guarantee payments</Description>
+            <VariableLocalized iso="GER">Ungültiges Datumsformat</VariableLocalized>
+            <VariableLocalized iso="ENG">The date format is invalid</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_zero_booking_note</Name>
+            <Description>Zero amount booking note</Description>
+            <VariableLocalized iso="GER">&lt;br&gt;&lt;br&gt;&lt;span style='color:#FF0000;'&gt;Diese Bestellung wird als Nullbuchung verarbeitet. Ihre Zahlungsdaten werden für zukünftige Online-Einkäufe gespeichert.&lt;/span&gt;</VariableLocalized>
+            <VariableLocalized iso="ENG">&lt;br&gt;&lt;br&gt;&lt;span style='color:#FF0000;'&gt;This order will be processed as zero amount booking which store your payment data for further online purchases.&lt;/span&gt;</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_testmode</Name>
+            <Description>Testmode text</Description>
+            <VariableLocalized iso="GER">&lt;br&gt;&lt;br&gt;&lt;span style='color:#FF0000;'&gt;Die Zahlung wird im Testmodus durchgeführt, daher wird der Betrag für diese Transaktion nicht eingezogen.&lt;/span&gt;</VariableLocalized>
+            <VariableLocalized iso="ENG">&lt;br&gt;&lt;br&gt;&lt;span style='color:#FF0000;'&gt;The payment will be processed in the test mode therefore amount for this transaction will not be charged.&lt;/span&gt;</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_customer_details_error</Name>
+            <Description>Invoice payments order amount text</Description>
+            <VariableLocalized iso="GER">Ungültige Werte für die Felder Kundenname-/email</VariableLocalized>
+            <VariableLocalized iso="ENG">Customer name/email fields are not valid</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_pin_message</Name>
+            <Description>Fraud prevention pin information text via call</Description>
+            <VariableLocalized iso="GER">In Kürze erhalten Sie einen Telefonanruf mit der PIN zu Ihrer Transaktion, um die Zahlung abzuschließen</VariableLocalized>
+            <VariableLocalized iso="ENG">You will shortly receive a transaction PIN through phone call to complete the payment</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sms_pin_message</Name>
+            <Description>Fraud prevention pin information text via mobile</Description>
+            <VariableLocalized iso="GER">In Kürze erhalten Sie eine SMS mit der PIN zu Ihrer Transaktion, um die Zahlung abzuschließen</VariableLocalized>
+            <VariableLocalized iso="ENG">You will shortly receive an SMS containing your transaction PIN to complete the payment</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_amount_fraudmodule_error</Name>
+            <Description>Order amount mismatch callback error</Description>
+            <VariableLocalized iso="GER">Der Bestellbetrag hat sich geändert, setzen Sie bitte die neue Bestellung fort</VariableLocalized>
+            <VariableLocalized iso="ENG">The order amount has been changed, please proceed with the new order</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_transaction_capture_text</Name>
+            <Description>Transaction confirmion text</Description>
+            <VariableLocalized iso="GER">Die Buchung wurde am %s um %s Uhr bestätigt</VariableLocalized>
+            <VariableLocalized iso="ENG">The transaction has been confirmed on %s %s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_transaction_capture_duedate_text</Name>
+            <Description>Transaction confirmation along with the due date text</Description>
+            <VariableLocalized iso="GER">Die Transaktion mit der TID: %s wurde erfolgreich bestätigt und das Fälligkeitsdatum auf %s gesetzt.</VariableLocalized>
+            <VariableLocalized iso="ENG">The transaction has been confirmed successfully for the TID: %s and the due date updated as %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_transaction_void_text</Name>
+            <Description>Transaction cancel text</Description>
+            <VariableLocalized iso="GER">Die Transaktion wurde am %s um %s Uhr storniert</VariableLocalized>
+            <VariableLocalized iso="ENG">The transaction has been canceled on %s %s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_refund_message</Name>
+            <Description>Refund successful text</Description>
+            <VariableLocalized iso="GER">Die Rückerstattung wurde für die TID: %s mit dem Betrag %s durchgeführt.</VariableLocalized>
+            <VariableLocalized iso="ENG">The refund has been executed for the TID: %s with the amount of %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_zero_booking_message</Name>
+            <Description>Zero amount booking update successful text</Description>
+            <VariableLocalized iso="GER">Ihre Bestellung wurde mit einem Betrag von %s gebucht. Ihre neue TID für den gebuchten Betrag: %s</VariableLocalized>
+            <VariableLocalized iso="ENG">Your order has been booked with the amount of %s. Your new TID for the booked amount: %s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_new_TID_message</Name>
+            <Description>New transaction ID</Description>
+            <VariableLocalized iso="GER"> Ihre neue TID für den erstatteten Betrag:</VariableLocalized>
+            <VariableLocalized iso="ENG"> Your new TID for the refund amount:</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_amount_update_message</Name>
+            <Description>Update amount success text</Description>
+            <VariableLocalized iso="GER">Der Betrag der Transaktion %s wurde am %s um %s Uhr erfolgreich geändert</VariableLocalized>
+            <VariableLocalized iso="ENG">The transaction amount %s has been updated successfully on %s %s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_amount_duedate_update_message</Name>
+            <Description>Update amount success text</Description>
+            <VariableLocalized iso="GER">Die Transaktion wurde mit dem Betrag %s und dem Fälligkeitsdatum %s aktualisiert.</VariableLocalized>
+            <VariableLocalized iso="ENG">The transaction has been updated with amount %s and due date with %s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_card_details_link_old</Name>
+            <Description>Text for already placed credit card details</Description>
+            <VariableLocalized iso="GER">Eingegebene Kartendaten</VariableLocalized>
+            <VariableLocalized iso="ENG">Given card details</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_card_details_link_new</Name>
+            <Description>Text for entering new credit card details</Description>
+            <VariableLocalized iso="GER">Neue Kartendaten eingeben</VariableLocalized>
+            <VariableLocalized iso="ENG">Enter new card details</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_account_details_link_old</Name>
+            <Description>Text for already placed account details</Description>
+            <VariableLocalized iso="GER">Eingegebene Kontodaten</VariableLocalized>
+            <VariableLocalized iso="ENG">Given account details</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_account_details_link_new</Name>
+            <Description>Text for entering new account details</Description>
+            <VariableLocalized iso="GER">Neue Kontodaten eingeben</VariableLocalized>
+            <VariableLocalized iso="ENG">Enter new account details</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_paypal_account_details_link_old</Name>
+            <Description>Text for already placed PayPal account details</Description>
+            <VariableLocalized iso="GER">Angegebene PayPal-Kontodetails</VariableLocalized>
+            <VariableLocalized iso="ENG">Given PayPal account details</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_paypal_account_details_link_new</Name>
+            <Description>Text for entering new PayPal account details</Description>
+            <VariableLocalized iso="GER">Mit neuen PayPal-Kontodetails fortfahren</VariableLocalized>
+            <VariableLocalized iso="ENG">Proceed with new PayPal account details</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_transaction_error</Name>
+            <Description>Transaction error text</Description>
+            <VariableLocalized iso="GER">Die Zahlung war nicht erfolgreich. Ein Fehler trat auf.</VariableLocalized>
+            <VariableLocalized iso="ENG">Payment was not successful. An error occurred.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_initial_execution</Name>
+            <Description>Callback text during payment initial level execution</Description>
+            <VariableLocalized iso="GER">Novalnet-Callback-Skript erfolgreich ausgeführt für die TID: %s mit dem Betrag %s am %s, um %s Uhr. Bitte suchen Sie nach der bezahlten Transaktion in unserer Novalnet-Händleradministration mit der TID: %s.</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet Callback Script executed successfully for the TID: %s with amount %s on %s %s. Please refer PAID transaction in our Novalnet Merchant Administration with the TID: %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_transaction_confirmation</Name>
+            <Description>Callback text during confirmation of a transaction from Novalnet admin portal</Description>
+            <VariableLocalized iso="GER">Nachricht vom Novalnet-Callback-Skript erhalten: Die Transaktion mit der TID: %s wurde erfolgreich bestätigt und das Fälligkeitsdatum auf %s gesetzt.</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet callback received. The transaction has been confirmed successfully for the TID: %s and the due date updated as %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_bookback_execution</Name>
+            <Description>Callback text during bookback execution</Description>
+            <VariableLocalized iso="GER">Novalnet-Callback-Meldung erhalten: Rückerstattung / Bookback erfolgreich ausgeführt für die TID: %s: Betrag: %s am %s um %s Uhr. TID der Folgebuchung: %s</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet callback received. Refund/Bookback executed successfully for the TID: %s amount: %s on %s %s. The subsequent TID: %s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_chargeback_execution</Name>
+            <Description>Callback text during chargeback execution</Description>
+            <VariableLocalized iso="GER">Novalnet-Callback-Nachricht erhalten: Chargeback erfolgreich importiert für die TID: %s Betrag: %s am %s um %s Uhr. TID der Folgebuchung: %s.</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet callback received. Chargeback executed successfully for the TID: %s amount: %s on %s %s. The subsequent TID: %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_transaction_cancellation</Name>
+            <Description>Callback text during transaction failure</Description>
+            <VariableLocalized iso="GER">Die Transaktion wurde storniert. Grund: </VariableLocalized>
+            <VariableLocalized iso="ENG">The transaction has been canceled due to: </VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_status_change</Name>
+            <Description>Callback text during ONLINE_TRANSFER_CREDIT payment paid entirely</Description>
+            <VariableLocalized iso="GER">Der Betrag von %s für die Bestellung %s wurde bezahlt. Überprüfen Sie bitten den erhaltenen Betrag und die Details zur TID und aktualisieren Sie den Status der Bestellung entsprechend.</VariableLocalized>
+            <VariableLocalized iso="ENG">The amount of %s for the order %s has been paid. Please verify received amount and TID details, and update the order status accordingly.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_pending_to_onhold_status_change</Name>
+            <Description>Callback text during payment initial level execution</Description>
+            <VariableLocalized iso="GER">Novalnet-Callback-Nachricht erhalten: Der Status der Transaktion mit der TID: %s wurde am %s um %s Uhr von ausstehend auf ausgesetzt geändert.</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet callback received. The transaction status has been changed from pending to on hold for the TID: %s on %s %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_callback_order_confirmation_text</Name>
+            <Description>Callback text during payment initial level execution</Description>
+            <VariableLocalized iso="GER">Meldung vom Novalnet-Server erhalten. Diese Transaktion wurde für die TID: %s am %s um %s Uhr als erfolgreich bestätigt.</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet callback received. The transaction has been confirmed successfully for the TID: %s on %s %s.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_invoice_gurantee_pending_payment_text</Name>
+            <Description>Gurantee pending payment text</Description>
+            <VariableLocalized iso="GER">Ihre Bestellung ist unter Bearbeitung. Sobald diese bestätigt wurde, erhalten Sie alle notwendigen Informationen zum Ausgleich der Rechnung. Wir bitten Sie zu beachten, dass dieser Vorgang bis zu 24 Stunden andauern kann.</VariableLocalized>
+            <VariableLocalized iso="ENG">Your order is under verification and once confirmed, we will send you our bank details to where the order amount should be transferred. Please note that this may take upto 24 hours.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_sepa_gurantee_pending_payment_text</Name>
+            <Description>Gurantee pending payment text</Description>
+            <VariableLocalized iso="GER">Ihre Bestellung wird derzeit überprüft. Wir werden Sie in Kürze über den Bestellstatus informieren. Bitte beachten Sie, dass dies bis zu 24 Stunden dauern kann.</VariableLocalized>
+            <VariableLocalized iso="ENG">Your order is under verification and we will soon update you with the order status. Please note that this may take upto 24 hours.</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_order_confirmation_text</Name>
+            <Description>order confirmation text</Description>
+            <VariableLocalized iso="GER">Novalnet-Callback-Nachricht erhalten: Die Buchung wurde am %s um %s Uhr bestätigt.</VariableLocalized>
+            <VariableLocalized iso="ENG">Novalnet callback received. The transaction has been confirmed on %s,%s</VariableLocalized>
+        </Variable>
+        <Variable>
+            <Name>__NN_oneclick_cc_save_data</Name>
+            <Description>One click shopping store data</Description>
+            <VariableLocalized iso="GER">&lt;span style='color:#000000;'&gt;Meine Kartendaten für zukünftige Bestellungen speichern&lt;/span&gt;&lt;br&gt;</VariableLocalized>
+            <VariableLocalized iso="ENG">&lt;span style='color:#000000;'&gt;Save my card details for future purchases&lt;/span&gt;&lt;br&gt;</VariableLocalized>
+         </Variable>
+        <Variable>
+            <Name>__NN_oneclick_sepa_save_data</Name>
+            <Description>One click shopping store data</Description>
+            <VariableLocalized iso="GER">&lt;span style='color:#000000;'&gt;Meine Kontodaten für zukünftige Bestellungen speichern&lt;/span&gt;&lt;br&gt;</VariableLocalized>
+            <VariableLocalized iso="ENG">&lt;span style='color:#000000;'&gt;Save my account details for future purchases&lt;/span&gt;&lt;br&gt;</VariableLocalized>
+         </Variable>
+        <Variable>
+            <Name>__NN_oneclick_paypal_save_data</Name>
+            <Description>One click shopping store data</Description>
+            <VariableLocalized iso="GER">&lt;span style='color:#000000;'&gt;Meine PayPal-Daten für zukünftige Bestellungen speichern&lt;/span&gt;&lt;br&gt;</VariableLocalized>
+            <VariableLocalized iso="ENG">&lt;span style='color:#000000;'&gt;Save my PayPal details for future purchases&lt;/span&gt;&lt;br&gt;</VariableLocalized>
+         </Variable>
+        
+    </Locales>
+
+    </Install>
+</jtlshop3plugin>
+

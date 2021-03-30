@@ -1,0 +1,1 @@
+ALTER TABLE xplugin_novalnetag_tpreinvoice_transaction_details DROP COLUMN nTid,DROP COLUMN nProductId,DROP COLUMN cKontoinhaber,DROP COLUMN cKontonummer,DROP COLUMN cBankleitzahl,DROP COLUMN nBetrag,DROP COLUMN cWaehrung,DROP COLUMN dDatum,ADD cReferenceValues LONGTEXT NOT NULL COMMENT 'Reference values for Invoice payments';
