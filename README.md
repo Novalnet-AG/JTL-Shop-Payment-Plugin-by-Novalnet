@@ -29,7 +29,6 @@ Novalnet merchant account is required for processing all international and local
 
 For detailed documentation and other technical inquiries, please send us an email at <a href="mailto:sales@novalnet.de"> sales@novalnet.de </a>
 
-
 ## Integrated Payment Methods
 
 -	Direct Debit SEPA
@@ -55,11 +54,9 @@ Follow these steps for JTL shop Payment Integration by Novalnet:
 4.	Configure Product Activation Key in the shop admin panel
 5.	Activate & configure the preferred payment types in your shop admin panel
 
-
 ## License
 
 See our License Agreement at: https://www.novalnet.com/payment-plugins/free/license
-
 
 ## Documentation & Support
 
@@ -73,9 +70,6 @@ technic@novalnet.de <br>
 sales@novalnet.de <br>
 +49 89 9230683-20
 
-
 ## Who is Novalnet?
  
 Novalnet is a German <a href="novalnet.de/zahlungsinstitut"> payment provider </a> offering payment gateways for online merchants and marketplaces worldwide. Our PCI  DSS certified SaaS engine is designed to automate the entire payment process from checkout to debt collection – with a single integration. We cover real-time risk management; secure payments (local + international) through escrow accounts, integrate receivables management, dynamic member and subscription management as well as other customized payment solutions to your JTL shop. For a complete and seamless shop system we do support JTL-Wawi integration for JTL shop.
-
-
